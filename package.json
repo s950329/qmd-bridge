@@ -18,6 +18,11 @@
         "gpu",
         "proxy"
     ],
+    "files": [
+        "bin/",
+        "src/",
+        "README.md"
+    ],
     "license": "MIT",
     "engines": {
         "node": ">=18"
