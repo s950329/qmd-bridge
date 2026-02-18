@@ -7,7 +7,9 @@
         "qmd-bridge": "./bin/cli.js"
     },
     "scripts": {
-        "start": "node src/server.js"
+        "start": "node src/server.js",
+        "test": "vitest run",
+        "test:watch": "vitest"
     },
     "keywords": [
         "qmd",
@@ -31,5 +33,9 @@
         "ora": "^8.1.0",
         "pino": "^9.4.0",
         "zod": "^3.23.8"
+    },
+    "devDependencies": {
+        "vitest": "^3.0.0",
+        "supertest": "^7.0.0"
     }
 }
