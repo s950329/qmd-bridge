@@ -1,10 +1,13 @@
 {
     "name": "qmd-bridge",
+    "author": "Leo Chien",
+    "repository": "https://github.com/s950329/qmd-bridge",
+    "homepage": "https://github.com/s950329/qmd-bridge#readme",
     "version": "1.0.0",
     "description": "A lightweight HTTP proxy service and CLI tool for bridging Docker containers to host qmd executable with GPU acceleration.",
     "type": "module",
     "bin": {
-        "qmd-bridge": "./bin/cli.js"
+        "qmd-bridge": "bin/cli.js"
     },
     "scripts": {
         "start": "node src/server.js",
