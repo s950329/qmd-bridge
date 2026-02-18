@@ -9,6 +9,7 @@ import { execFile } from 'node:child_process';
 import { existsSync, readFileSync, createReadStream, watchFile, statSync } from 'node:fs';
 import { VERSION, LOG_DIR, PID_FILE } from '../src/constants.js';
 import { getConfig, getServerConfig } from '../src/utils/config.js';
+import { checkQmdInstalled, printQmdNotFoundWarning } from '../src/utils/qmd-check.js';
 import {
   listTenants,
   addTenant,
@@ -22,10 +23,23 @@ import { join } from 'node:path';
 
 const program = new Command();
 
+// Commands that do not require qmd to be installed
+const QMD_FREE_COMMANDS = new Set(['config', 'logs', 'help']);
+
 program
   .name('qmd-bridge')
   .description('A lightweight HTTP proxy for bridging Docker containers to host qmd with GPU acceleration.')
-  .version(VERSION);
+  .version(VERSION)
+  .hook('preAction', (thisCommand) => {
+    const commandName = thisCommand.args?.[0] || thisCommand.name();
+    if (QMD_FREE_COMMANDS.has(commandName)) return;
+
+    const { installed } = checkQmdInstalled();
+    if (!installed) {
+      printQmdNotFoundWarning();
+      process.exit(1);
+    }
+  });
 
 // ─── start ───────────────────────────────────────────────────────────
 program
