@@ -23,6 +23,14 @@ qmd-bridge/
 │   └── cli.js              # CLI entry point (#!/usr/bin/env node)
 ├── src/
 │   ├── server.js            # Express HTTP server
+│   ├── mcp/
+│   │   ├── index.js         # MCP server entry (McpServer + HTTP handler)
+│   │   └── tools/
+│   │       ├── search.js    # qmd_search tool
+│   │       ├── vsearch.js   # qmd_vsearch tool
+│   │       ├── query.js     # qmd_query tool
+│   │       ├── list-tenants.js # qmd_list_tenants tool
+│   │       └── health.js    # qmd_health tool
 │   ├── middleware/
 │   │   └── auth.js          # Bearer Token auth middleware
 │   ├── routes/
@@ -88,6 +96,7 @@ These rules are **non-negotiable**. Any code change must comply:
 
 - `POST /qmd` — Execute qmd query (requires Bearer token auth)
 - `GET /health` — Health check (no auth required)
+- `POST /mcp` — MCP (Model Context Protocol) endpoint via Streamable HTTP (no auth at route level; search tools require token parameter)
 - All request validation uses Zod schemas.
 
 ### Process Execution

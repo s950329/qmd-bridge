@@ -1,6 +1,6 @@
 # qmd-bridge
 
-A lightweight HTTP proxy service and CLI management tool that bridges Docker containers to the host `qmd` executable, enabling GPU-accelerated local knowledge base search on macOS.
+A lightweight HTTP proxy service and CLI management tool that bridges Docker containers to the host `qmd` executable, enabling GPU-accelerated local knowledge base search on macOS. Also serves as an [MCP (Model Context Protocol)](https://modelcontextprotocol.io/) server, allowing AI agents to directly use qmd search capabilities.
 
 ## Problem
 
@@ -49,8 +49,13 @@ graph TD
         C2[Container B] -- HTTP/Token B --> G
     end
 
+    subgraph AI_Agents [AI Agents]
+        A1[Claude / Gemini / etc.] -- MCP Protocol --> MCP_EP
+    end
+
     subgraph macOS_Host [macOS Host]
         G -->|Port 3333| S[qmd-bridge Server]
+        MCP_EP["POST /mcp"] -->|Port 3333| S
         S -->|Auth & Routing| H[Tenant Manager]
         H -->|execFile with CWD| E[qmd Executable]
         E -->|Metal API| GPU[Apple Silicon GPU]
@@ -124,6 +129,34 @@ curl -s -X POST http://host.docker.internal:3333/qmd \
 }
 ```
 
+### `POST /mcp` — MCP (Model Context Protocol) endpoint
+
+Exposes qmd-bridge capabilities as MCP tools via [Streamable HTTP](https://modelcontextprotocol.io/specification/draft/basic/transports#streamable-http) transport. AI agents can discover and call tools through the standard MCP protocol.
+
+**Available Tools**
+
+| Tool | Auth | Description |
+| --- | --- | --- |
+| `qmd_search` | Token required | Keyword search against a qmd knowledge base |
+| `qmd_vsearch` | Token required | Vector similarity search (embedding-based) |
+| `qmd_query` | Token required | LLM reranking query for most relevant results |
+| `qmd_list_tenants` | No | List all configured tenants (tokens excluded) |
+| `qmd_health` | No | Server health check (version, uptime, active executions) |
+
+Search tools require a `token` parameter (tenant Bearer token) and a `query` parameter.
+
+**MCP Client Configuration**
+
+```json
+{
+  "mcpServers": {
+    "qmd-bridge": {
+      "url": "http://localhost:3333/mcp"
+    }
+  }
+}
+```
+
 ## Docker Integration
 
 Set these environment variables in your Docker container:
@@ -131,6 +164,9 @@ Set these environment variables in your Docker container:
 ```bash
 QMD_BRIDGE_URL=http://host.docker.internal:3333
 QMD_BRIDGE_TOKEN=qmd_sk_...
+
+# For MCP clients inside containers
+QMD_BRIDGE_MCP_URL=http://host.docker.internal:3333/mcp
 ```
 
 ## Configuration
