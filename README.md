@@ -1,5 +1,10 @@
 # qmd-bridge
 
+[![npm version](https://img.shields.io/npm/v/qmd-bridge.svg)](https://www.npmjs.com/package/qmd-bridge)
+[![npm downloads](https://img.shields.io/npm/dm/qmd-bridge.svg)](https://www.npmjs.com/package/qmd-bridge)
+[![license](https://img.shields.io/npm/l/qmd-bridge.svg)](https://github.com/s950329/qmd-bridge/blob/main/LICENSE)
+[![node](https://img.shields.io/node/v/qmd-bridge.svg)](https://nodejs.org)
+
 A lightweight HTTP proxy service and CLI management tool that bridges Docker containers to the host `qmd` executable, enabling GPU-accelerated local knowledge base search on macOS. Also serves as an [MCP (Model Context Protocol)](https://modelcontextprotocol.io/) server, allowing AI agents to directly use qmd search capabilities.
 
 ## Problem
@@ -23,8 +28,22 @@ Docker Desktop for Mac cannot access host GPU/NPU resources due to virtualizatio
 
 ## Installation
 
+**全域安裝（推薦）**
+
 ```bash
 npm install -g qmd-bridge
+```
+
+**使用 npx 直接執行（免安裝）**
+
+```bash
+npx qmd-bridge start
+```
+
+**作為專案依賴安裝**
+
+```bash
+npm install qmd-bridge
 ```
 
 ## Quick Start
