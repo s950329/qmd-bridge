@@ -21,6 +21,30 @@ Docker Desktop for Mac cannot access host GPU/NPU resources due to virtualizatio
 - **Multi-Tenant Isolation** — Single service instance serves multiple containers with token-based access control and path binding
 - **Resource Efficiency** — LLM model loaded once system-wide, reducing RAM usage
 
+## Benchmark
+
+Tested on Apple M-series Mac with 10 queries × 1 run after warmup (models pre-loaded into OS page cache). Docker container runs on CPU only (no GPU access).
+
+### Latency (mean ms per query)
+
+| Environment | `search` (BM25) | `vsearch` (vector) | `query` (LLM pipeline) |
+| --- | --- | --- | --- |
+| Docker native (CPU) | 689 ms | 3,736 ms | **91,793 ms** ⚠ |
+| Mac native (Metal GPU) | 879 ms | 2,298 ms | 1,121 ms |
+| **Docker via qmd-bridge** | **751 ms** | **1,804 ms** | **963 ms** |
+
+### Speedup vs Docker native
+
+| Command | qmd-bridge vs Docker |
+| --- | --- |
+| `search` | ~1× (no difference — BM25 is CPU/SQLite, no GPU benefit) |
+| `vsearch` | **2.1×** faster |
+| `query` | **~95×** faster |
+
+> **Notes:**
+> - Docker native `query` averages 92 seconds because each `docker exec` spawns a new process that must reload ~2.1 GB of GGUF model files (query expansion + reranker) on CPU. Individual queries ranged from 1.8 s to 278 s depending on LLM output length.
+> - qmd-bridge appears slightly faster than Mac native in `vsearch` and `query`. This is a measurement artifact: the benchmark runs scenarios in order (Docker → Mac → Bridge), so by the time Bridge executes, model files are already resident in the Mac OS page cache from prior Mac native runs. In practice, Bridge adds ~1–5 ms of HTTP overhead compared to Mac native — they are effectively equivalent in steady-state performance.
+
 ## Prerequisites
 
 - **Node.js** >= 18 LTS
@@ -207,6 +231,15 @@ Config is stored at `~/.config/qmd-bridge/config.json`.
 - **Input Validation** — Command whitelist + query length limit enforced via `zod`
 - **Network Binding** — Defaults to `127.0.0.1` (localhost only)
 - **Token Storage** — Config file permissions set to `600` (owner-only)
+
+## Disclaimer
+
+> The core logic of this project was primarily written with the assistance of AI.
+> Human oversight was applied for architecture decisions, code review, and quality assurance.
+
+## Contributing
+
+Contributions are welcome! Please read the [Contributing Guidelines](CONTRIBUTING.md) before submitting a pull request or opening an issue.
 
 ## License
 

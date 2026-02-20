@@ -1,0 +1,1984 @@
+{
+  "table": [
+    {
+      "id": "docker-search",
+      "name": "Docker (native)",
+      "command": "search",
+      "latency": {
+        "mean": 2297,
+        "min": 2052,
+        "max": 2578,
+        "p50": 2226,
+        "p95": 2578
+      },
+      "overlap": 1,
+      "precision": 0.4
+    },
+    {
+      "id": "mac-search",
+      "name": "Mac (native)",
+      "command": "search",
+      "latency": {
+        "mean": 911,
+        "min": 796,
+        "max": 1081,
+        "p50": 867,
+        "p95": 1081
+      },
+      "overlap": 1,
+      "precision": 0.4
+    },
+    {
+      "id": "bridge-search",
+      "name": "Docker via Bridge",
+      "command": "search",
+      "latency": {
+        "mean": 880,
+        "min": 803,
+        "max": 1096,
+        "p50": 853,
+        "p95": 1096
+      },
+      "overlap": 1,
+      "precision": 0.4
+    },
+    {
+      "id": "docker-vsearch",
+      "name": "Docker (native)",
+      "command": "vsearch",
+      "latency": {
+        "mean": 82027,
+        "min": 33514,
+        "max": 120021,
+        "p50": 57659,
+        "p95": 120021
+      },
+      "overlap": 0.33999999999999997,
+      "precision": 0.16
+    },
+    {
+      "id": "mac-vsearch",
+      "name": "Mac (native)",
+      "command": "vsearch",
+      "latency": {
+        "mean": 33023,
+        "min": 13046,
+        "max": 88464,
+        "p50": 21611,
+        "p95": 88464
+      },
+      "overlap": 1,
+      "precision": 0.32
+    },
+    {
+      "id": "bridge-vsearch",
+      "name": "Docker via Bridge",
+      "command": "vsearch",
+      "latency": {
+        "mean": 3302,
+        "min": 2365,
+        "max": 5512,
+        "p50": 2935,
+        "p95": 5512
+      },
+      "overlap": 1,
+      "precision": 0.32
+    },
+    {
+      "id": "docker-query",
+      "name": "Docker (native)",
+      "command": "query",
+      "latency": {
+        "mean": 464548,
+        "min": 28813,
+        "max": 2273685,
+        "p50": 120024,
+        "p95": 2273685
+      },
+      "overlap": 0,
+      "precision": 0
+    },
+    {
+      "id": "mac-query",
+      "name": "Mac (native)",
+      "command": "query",
+      "latency": {
+        "mean": 18865,
+        "min": 15269,
+        "max": 24825,
+        "p50": 17810,
+        "p95": 24825
+      },
+      "overlap": 1,
+      "precision": 0.32
+    },
+    {
+      "id": "bridge-query",
+      "name": "Docker via Bridge",
+      "command": "query",
+      "latency": {
+        "mean": 1838,
+        "min": 1458,
+        "max": 3354,
+        "p50": 1500,
+        "p95": 3354
+      },
+      "overlap": 1,
+      "precision": 0.32
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "docker-search",
+      "name": "Docker (native)",
+      "command": "search",
+      "results": [
+        {
+          "queryId": "q1",
+          "query": "JWT authentication bearer token",
+          "latency": {
+            "mean": 2566,
+            "min": 1907,
+            "max": 3153,
+            "p50": 2638,
+            "p95": 3153
+          },
+          "files": [
+            "auth-jwt.md"
+          ],
+          "expected": [
+            "auth-jwt.md",
+            "auth-oauth2.md"
+          ]
+        },
+        {
+          "queryId": "q2",
+          "query": "bcrypt password hashing salt rounds",
+          "latency": {
+            "mean": 2399,
+            "min": 2035,
+            "max": 2617,
+            "p50": 2545,
+            "p95": 2617
+          },
+          "files": [],
+          "expected": [
+            "auth-bcrypt.md"
+          ]
+        },
+        {
+          "queryId": "q3",
+          "query": "PostgreSQL connection pool size configuration",
+          "latency": {
+            "mean": 2226,
+            "min": 1840,
+            "max": 2548,
+            "p50": 2289,
+            "p95": 2548
+          },
+          "files": [],
+          "expected": [
+            "db-postgres.md",
+            "db-indexing.md"
+          ]
+        },
+        {
+          "queryId": "q4",
+          "query": "Redis cache TTL expiration key value",
+          "latency": {
+            "mean": 2240,
+            "min": 1535,
+            "max": 2746,
+            "p50": 2439,
+            "p95": 2746
+          },
+          "files": [],
+          "expected": [
+            "cache-redis.md"
+          ]
+        },
+        {
+          "queryId": "q5",
+          "query": "API rate limiting throttle window requests",
+          "latency": {
+            "mean": 2063,
+            "min": 1846,
+            "max": 2273,
+            "p50": 2069,
+            "p95": 2273
+          },
+          "files": [],
+          "expected": [
+            "rate-limiting.md",
+            "api-design.md"
+          ]
+        },
+        {
+          "queryId": "q6",
+          "query": "Docker container deployment image build",
+          "latency": {
+            "mean": 2052,
+            "min": 1970,
+            "max": 2159,
+            "p50": 2027,
+            "p95": 2159
+          },
+          "files": [],
+          "expected": [
+            "docker-containers.md",
+            "kubernetes.md"
+          ]
+        },
+        {
+          "queryId": "q7",
+          "query": "unit testing Jest mock spy assertion",
+          "latency": {
+            "mean": 2151,
+            "min": 1717,
+            "max": 2982,
+            "p50": 1754,
+            "p95": 2982
+          },
+          "files": [],
+          "expected": [
+            "testing-unit.md",
+            "testing-integration.md"
+          ]
+        },
+        {
+          "queryId": "q8",
+          "query": "SQL injection parameterized query prevention",
+          "latency": {
+            "mean": 2534,
+            "min": 2013,
+            "max": 3003,
+            "p50": 2586,
+            "p95": 3003
+          },
+          "files": [
+            "security-sqli.md"
+          ],
+          "expected": [
+            "security-sqli.md"
+          ]
+        },
+        {
+          "queryId": "q9",
+          "query": "RabbitMQ message queue consumer producer",
+          "latency": {
+            "mean": 2160,
+            "min": 1612,
+            "max": 2688,
+            "p50": 2180,
+            "p95": 2688
+          },
+          "files": [
+            "messaging-queue.md"
+          ],
+          "expected": [
+            "messaging-queue.md"
+          ]
+        },
+        {
+          "queryId": "q10",
+          "query": "memory leak event listener optimization heap",
+          "latency": {
+            "mean": 2578,
+            "min": 2262,
+            "max": 3064,
+            "p50": 2407,
+            "p95": 3064
+          },
+          "files": [
+            "memory-optimization.md",
+            "performance-profiling.md"
+          ],
+          "expected": [
+            "memory-optimization.md",
+            "performance-profiling.md"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mac-search",
+      "name": "Mac (native)",
+      "command": "search",
+      "results": [
+        {
+          "queryId": "q1",
+          "query": "JWT authentication bearer token",
+          "latency": {
+            "mean": 852,
+            "min": 807,
+            "max": 896,
+            "p50": 854,
+            "p95": 896
+          },
+          "files": [
+            "auth-jwt.md"
+          ],
+          "expected": [
+            "auth-jwt.md",
+            "auth-oauth2.md"
+          ]
+        },
+        {
+          "queryId": "q2",
+          "query": "bcrypt password hashing salt rounds",
+          "latency": {
+            "mean": 867,
+            "min": 809,
+            "max": 945,
+            "p50": 846,
+            "p95": 945
+          },
+          "files": [],
+          "expected": [
+            "auth-bcrypt.md"
+          ]
+        },
+        {
+          "queryId": "q3",
+          "query": "PostgreSQL connection pool size configuration",
+          "latency": {
+            "mean": 804,
+            "min": 759,
+            "max": 869,
+            "p50": 784,
+            "p95": 869
+          },
+          "files": [],
+          "expected": [
+            "db-postgres.md",
+            "db-indexing.md"
+          ]
+        },
+        {
+          "queryId": "q4",
+          "query": "Redis cache TTL expiration key value",
+          "latency": {
+            "mean": 941,
+            "min": 864,
+            "max": 992,
+            "p50": 967,
+            "p95": 992
+          },
+          "files": [],
+          "expected": [
+            "cache-redis.md"
+          ]
+        },
+        {
+          "queryId": "q5",
+          "query": "API rate limiting throttle window requests",
+          "latency": {
+            "mean": 1026,
+            "min": 797,
+            "max": 1346,
+            "p50": 934,
+            "p95": 1346
+          },
+          "files": [],
+          "expected": [
+            "rate-limiting.md",
+            "api-design.md"
+          ]
+        },
+        {
+          "queryId": "q6",
+          "query": "Docker container deployment image build",
+          "latency": {
+            "mean": 1081,
+            "min": 927,
+            "max": 1353,
+            "p50": 963,
+            "p95": 1353
+          },
+          "files": [],
+          "expected": [
+            "docker-containers.md",
+            "kubernetes.md"
+          ]
+        },
+        {
+          "queryId": "q7",
+          "query": "unit testing Jest mock spy assertion",
+          "latency": {
+            "mean": 796,
+            "min": 762,
+            "max": 824,
+            "p50": 801,
+            "p95": 824
+          },
+          "files": [],
+          "expected": [
+            "testing-unit.md",
+            "testing-integration.md"
+          ]
+        },
+        {
+          "queryId": "q8",
+          "query": "SQL injection parameterized query prevention",
+          "latency": {
+            "mean": 823,
+            "min": 754,
+            "max": 877,
+            "p50": 837,
+            "p95": 877
+          },
+          "files": [
+            "security-sqli.md"
+          ],
+          "expected": [
+            "security-sqli.md"
+          ]
+        },
+        {
+          "queryId": "q9",
+          "query": "RabbitMQ message queue consumer producer",
+          "latency": {
+            "mean": 922,
+            "min": 909,
+            "max": 943,
+            "p50": 915,
+            "p95": 943
+          },
+          "files": [
+            "messaging-queue.md"
+          ],
+          "expected": [
+            "messaging-queue.md"
+          ]
+        },
+        {
+          "queryId": "q10",
+          "query": "memory leak event listener optimization heap",
+          "latency": {
+            "mean": 1000,
+            "min": 879,
+            "max": 1105,
+            "p50": 1016,
+            "p95": 1105
+          },
+          "files": [
+            "memory-optimization.md",
+            "performance-profiling.md"
+          ],
+          "expected": [
+            "memory-optimization.md",
+            "performance-profiling.md"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bridge-search",
+      "name": "Docker via Bridge",
+      "command": "search",
+      "results": [
+        {
+          "queryId": "q1",
+          "query": "JWT authentication bearer token",
+          "latency": {
+            "mean": 1096,
+            "min": 893,
+            "max": 1378,
+            "p50": 1017,
+            "p95": 1378
+          },
+          "files": [
+            "auth-jwt.md"
+          ],
+          "expected": [
+            "auth-jwt.md",
+            "auth-oauth2.md"
+          ]
+        },
+        {
+          "queryId": "q2",
+          "query": "bcrypt password hashing salt rounds",
+          "latency": {
+            "mean": 874,
+            "min": 826,
+            "max": 930,
+            "p50": 866,
+            "p95": 930
+          },
+          "files": [],
+          "expected": [
+            "auth-bcrypt.md"
+          ]
+        },
+        {
+          "queryId": "q3",
+          "query": "PostgreSQL connection pool size configuration",
+          "latency": {
+            "mean": 897,
+            "min": 827,
+            "max": 945,
+            "p50": 919,
+            "p95": 945
+          },
+          "files": [],
+          "expected": [
+            "db-postgres.md",
+            "db-indexing.md"
+          ]
+        },
+        {
+          "queryId": "q4",
+          "query": "Redis cache TTL expiration key value",
+          "latency": {
+            "mean": 890,
+            "min": 835,
+            "max": 931,
+            "p50": 904,
+            "p95": 931
+          },
+          "files": [],
+          "expected": [
+            "cache-redis.md"
+          ]
+        },
+        {
+          "queryId": "q5",
+          "query": "API rate limiting throttle window requests",
+          "latency": {
+            "mean": 889,
+            "min": 839,
+            "max": 951,
+            "p50": 877,
+            "p95": 951
+          },
+          "files": [],
+          "expected": [
+            "rate-limiting.md",
+            "api-design.md"
+          ]
+        },
+        {
+          "queryId": "q6",
+          "query": "Docker container deployment image build",
+          "latency": {
+            "mean": 803,
+            "min": 791,
+            "max": 816,
+            "p50": 802,
+            "p95": 816
+          },
+          "files": [],
+          "expected": [
+            "docker-containers.md",
+            "kubernetes.md"
+          ]
+        },
+        {
+          "queryId": "q7",
+          "query": "unit testing Jest mock spy assertion",
+          "latency": {
+            "mean": 845,
+            "min": 813,
+            "max": 863,
+            "p50": 860,
+            "p95": 863
+          },
+          "files": [],
+          "expected": [
+            "testing-unit.md",
+            "testing-integration.md"
+          ]
+        },
+        {
+          "queryId": "q8",
+          "query": "SQL injection parameterized query prevention",
+          "latency": {
+            "mean": 838,
+            "min": 803,
+            "max": 856,
+            "p50": 855,
+            "p95": 856
+          },
+          "files": [
+            "security-sqli.md"
+          ],
+          "expected": [
+            "security-sqli.md"
+          ]
+        },
+        {
+          "queryId": "q9",
+          "query": "RabbitMQ message queue consumer producer",
+          "latency": {
+            "mean": 853,
+            "min": 794,
+            "max": 930,
+            "p50": 836,
+            "p95": 930
+          },
+          "files": [
+            "messaging-queue.md"
+          ],
+          "expected": [
+            "messaging-queue.md"
+          ]
+        },
+        {
+          "queryId": "q10",
+          "query": "memory leak event listener optimization heap",
+          "latency": {
+            "mean": 815,
+            "min": 801,
+            "max": 823,
+            "p50": 821,
+            "p95": 823
+          },
+          "files": [
+            "memory-optimization.md",
+            "performance-profiling.md"
+          ],
+          "expected": [
+            "memory-optimization.md",
+            "performance-profiling.md"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "docker-vsearch",
+      "name": "Docker (native)",
+      "command": "vsearch",
+      "results": [
+        {
+          "queryId": "q1",
+          "query": "JWT authentication bearer token",
+          "latency": {
+            "mean": 57659,
+            "min": 57659,
+            "max": 57659,
+            "p50": 57659,
+            "p95": 57659
+          },
+          "files": [
+            "auth-jwt.md",
+            "auth-oauth2.md",
+            "microservices.md",
+            "testing-integration.md",
+            "api-design.md"
+          ],
+          "expected": [
+            "auth-jwt.md",
+            "auth-oauth2.md"
+          ]
+        },
+        {
+          "queryId": "q2",
+          "query": "bcrypt password hashing salt rounds",
+          "latency": {
+            "mean": 49863,
+            "min": 49863,
+            "max": 49863,
+            "p50": 49863,
+            "p95": 49863
+          },
+          "files": [
+            "auth-bcrypt.md",
+            "security-sqli.md",
+            "auth-jwt.md",
+            "security-xss.md",
+            "auth-oauth2.md"
+          ],
+          "expected": [
+            "auth-bcrypt.md"
+          ]
+        },
+        {
+          "queryId": "q3",
+          "query": "PostgreSQL connection pool size configuration",
+          "latency": {
+            "mean": 37662,
+            "min": 37662,
+            "max": 37662,
+            "p50": 37662,
+            "p95": 37662
+          },
+          "files": [
+            "db-postgres.md",
+            "db-indexing.md",
+            "performance-profiling.md",
+            "cache-redis.md",
+            "security-sqli.md"
+          ],
+          "expected": [
+            "db-postgres.md",
+            "db-indexing.md"
+          ]
+        },
+        {
+          "queryId": "q4",
+          "query": "Redis cache TTL expiration key value",
+          "latency": {
+            "mean": 41477,
+            "min": 41477,
+            "max": 41477,
+            "p50": 41477,
+            "p95": 41477
+          },
+          "files": [
+            "cache-redis.md",
+            "rate-limiting.md",
+            "memory-optimization.md",
+            "messaging-queue.md",
+            "performance-profiling.md"
+          ],
+          "expected": [
+            "cache-redis.md"
+          ]
+        },
+        {
+          "queryId": "q5",
+          "query": "API rate limiting throttle window requests",
+          "latency": {
+            "mean": 33514,
+            "min": 33514,
+            "max": 33514,
+            "p50": 33514,
+            "p95": 33514
+          },
+          "files": [
+            "rate-limiting.md",
+            "api-design.md",
+            "auth-oauth2.md",
+            "performance-profiling.md",
+            "graphql.md"
+          ],
+          "expected": [
+            "rate-limiting.md",
+            "api-design.md"
+          ]
+        },
+        {
+          "queryId": "q6",
+          "query": "Docker container deployment image build",
+          "latency": {
+            "mean": 120020,
+            "min": 120020,
+            "max": 120020,
+            "p50": 120020,
+            "p95": 120020
+          },
+          "files": [],
+          "expected": [
+            "docker-containers.md",
+            "kubernetes.md"
+          ]
+        },
+        {
+          "queryId": "q7",
+          "query": "unit testing Jest mock spy assertion",
+          "latency": {
+            "mean": 120015,
+            "min": 120015,
+            "max": 120015,
+            "p50": 120015,
+            "p95": 120015
+          },
+          "files": [],
+          "expected": [
+            "testing-unit.md",
+            "testing-integration.md"
+          ]
+        },
+        {
+          "queryId": "q8",
+          "query": "SQL injection parameterized query prevention",
+          "latency": {
+            "mean": 120021,
+            "min": 120021,
+            "max": 120021,
+            "p50": 120021,
+            "p95": 120021
+          },
+          "files": [],
+          "expected": [
+            "security-sqli.md"
+          ]
+        },
+        {
+          "queryId": "q9",
+          "query": "RabbitMQ message queue consumer producer",
+          "latency": {
+            "mean": 120016,
+            "min": 120016,
+            "max": 120016,
+            "p50": 120016,
+            "p95": 120016
+          },
+          "files": [],
+          "expected": [
+            "messaging-queue.md"
+          ]
+        },
+        {
+          "queryId": "q10",
+          "query": "memory leak event listener optimization heap",
+          "latency": {
+            "mean": 120018,
+            "min": 120018,
+            "max": 120018,
+            "p50": 120018,
+            "p95": 120018
+          },
+          "files": [],
+          "expected": [
+            "memory-optimization.md",
+            "performance-profiling.md"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mac-vsearch",
+      "name": "Mac (native)",
+      "command": "vsearch",
+      "results": [
+        {
+          "queryId": "q1",
+          "query": "JWT authentication bearer token",
+          "latency": {
+            "mean": 22588,
+            "min": 22588,
+            "max": 22588,
+            "p50": 22588,
+            "p95": 22588
+          },
+          "files": [
+            "auth-jwt.md",
+            "auth-oauth2.md",
+            "api-design.md",
+            "microservices.md",
+            "auth-bcrypt.md"
+          ],
+          "expected": [
+            "auth-jwt.md",
+            "auth-oauth2.md"
+          ]
+        },
+        {
+          "queryId": "q2",
+          "query": "bcrypt password hashing salt rounds",
+          "latency": {
+            "mean": 84812,
+            "min": 84812,
+            "max": 84812,
+            "p50": 84812,
+            "p95": 84812
+          },
+          "files": [
+            "auth-bcrypt.md",
+            "security-sqli.md",
+            "security-xss.md",
+            "auth-jwt.md",
+            "api-design.md"
+          ],
+          "expected": [
+            "auth-bcrypt.md"
+          ]
+        },
+        {
+          "queryId": "q3",
+          "query": "PostgreSQL connection pool size configuration",
+          "latency": {
+            "mean": 17604,
+            "min": 17604,
+            "max": 17604,
+            "p50": 17604,
+            "p95": 17604
+          },
+          "files": [
+            "db-postgres.md",
+            "docker-containers.md",
+            "testing-integration.md",
+            "graphql.md",
+            "db-indexing.md"
+          ],
+          "expected": [
+            "db-postgres.md",
+            "db-indexing.md"
+          ]
+        },
+        {
+          "queryId": "q4",
+          "query": "Redis cache TTL expiration key value",
+          "latency": {
+            "mean": 14516,
+            "min": 14516,
+            "max": 14516,
+            "p50": 14516,
+            "p95": 14516
+          },
+          "files": [
+            "cache-redis.md",
+            "rate-limiting.md",
+            "auth-oauth2.md",
+            "auth-jwt.md",
+            "db-postgres.md"
+          ],
+          "expected": [
+            "cache-redis.md"
+          ]
+        },
+        {
+          "queryId": "q5",
+          "query": "API rate limiting throttle window requests",
+          "latency": {
+            "mean": 17381,
+            "min": 17381,
+            "max": 17381,
+            "p50": 17381,
+            "p95": 17381
+          },
+          "files": [
+            "rate-limiting.md",
+            "api-design.md",
+            "auth-oauth2.md",
+            "performance-profiling.md",
+            "graphql.md"
+          ],
+          "expected": [
+            "rate-limiting.md",
+            "api-design.md"
+          ]
+        },
+        {
+          "queryId": "q6",
+          "query": "Docker container deployment image build",
+          "latency": {
+            "mean": 28311,
+            "min": 28311,
+            "max": 28311,
+            "p50": 28311,
+            "p95": 28311
+          },
+          "files": [
+            "docker-containers.md",
+            "cicd-pipeline.md",
+            "kubernetes.md",
+            "testing-integration.md",
+            "microservices.md"
+          ],
+          "expected": [
+            "docker-containers.md",
+            "kubernetes.md"
+          ]
+        },
+        {
+          "queryId": "q7",
+          "query": "unit testing Jest mock spy assertion",
+          "latency": {
+            "mean": 21900,
+            "min": 21900,
+            "max": 21900,
+            "p50": 21900,
+            "p95": 21900
+          },
+          "files": [
+            "testing-unit.md",
+            "testing-integration.md",
+            "auth-jwt.md",
+            "microservices.md",
+            "performance-profiling.md"
+          ],
+          "expected": [
+            "testing-unit.md",
+            "testing-integration.md"
+          ]
+        },
+        {
+          "queryId": "q8",
+          "query": "SQL injection parameterized query prevention",
+          "latency": {
+            "mean": 21611,
+            "min": 21611,
+            "max": 21611,
+            "p50": 21611,
+            "p95": 21611
+          },
+          "files": [
+            "security-sqli.md",
+            "security-xss.md",
+            "db-indexing.md",
+            "api-design.md",
+            "performance-profiling.md"
+          ],
+          "expected": [
+            "security-sqli.md"
+          ]
+        },
+        {
+          "queryId": "q9",
+          "query": "RabbitMQ message queue consumer producer",
+          "latency": {
+            "mean": 88464,
+            "min": 88464,
+            "max": 88464,
+            "p50": 88464,
+            "p95": 88464
+          },
+          "files": [
+            "messaging-queue.md",
+            "api-design.md",
+            "performance-profiling.md",
+            "microservices.md",
+            "docker-containers.md"
+          ],
+          "expected": [
+            "messaging-queue.md"
+          ]
+        },
+        {
+          "queryId": "q10",
+          "query": "memory leak event listener optimization heap",
+          "latency": {
+            "mean": 13046,
+            "min": 13046,
+            "max": 13046,
+            "p50": 13046,
+            "p95": 13046
+          },
+          "files": [
+            "memory-optimization.md",
+            "performance-profiling.md",
+            "cache-redis.md",
+            "microservices.md",
+            "rate-limiting.md"
+          ],
+          "expected": [
+            "memory-optimization.md",
+            "performance-profiling.md"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bridge-vsearch",
+      "name": "Docker via Bridge",
+      "command": "vsearch",
+      "results": [
+        {
+          "queryId": "q1",
+          "query": "JWT authentication bearer token",
+          "latency": {
+            "mean": 2729,
+            "min": 2729,
+            "max": 2729,
+            "p50": 2729,
+            "p95": 2729
+          },
+          "files": [
+            "auth-jwt.md",
+            "auth-oauth2.md",
+            "api-design.md",
+            "microservices.md",
+            "auth-bcrypt.md"
+          ],
+          "expected": [
+            "auth-jwt.md",
+            "auth-oauth2.md"
+          ]
+        },
+        {
+          "queryId": "q2",
+          "query": "bcrypt password hashing salt rounds",
+          "latency": {
+            "mean": 3531,
+            "min": 3531,
+            "max": 3531,
+            "p50": 3531,
+            "p95": 3531
+          },
+          "files": [
+            "auth-bcrypt.md",
+            "security-sqli.md",
+            "security-xss.md",
+            "auth-jwt.md",
+            "api-design.md"
+          ],
+          "expected": [
+            "auth-bcrypt.md"
+          ]
+        },
+        {
+          "queryId": "q3",
+          "query": "PostgreSQL connection pool size configuration",
+          "latency": {
+            "mean": 2935,
+            "min": 2935,
+            "max": 2935,
+            "p50": 2935,
+            "p95": 2935
+          },
+          "files": [
+            "db-postgres.md",
+            "docker-containers.md",
+            "testing-integration.md",
+            "graphql.md",
+            "db-indexing.md"
+          ],
+          "expected": [
+            "db-postgres.md",
+            "db-indexing.md"
+          ]
+        },
+        {
+          "queryId": "q4",
+          "query": "Redis cache TTL expiration key value",
+          "latency": {
+            "mean": 3059,
+            "min": 3059,
+            "max": 3059,
+            "p50": 3059,
+            "p95": 3059
+          },
+          "files": [
+            "cache-redis.md",
+            "rate-limiting.md",
+            "auth-oauth2.md",
+            "auth-jwt.md",
+            "db-postgres.md"
+          ],
+          "expected": [
+            "cache-redis.md"
+          ]
+        },
+        {
+          "queryId": "q5",
+          "query": "API rate limiting throttle window requests",
+          "latency": {
+            "mean": 2933,
+            "min": 2933,
+            "max": 2933,
+            "p50": 2933,
+            "p95": 2933
+          },
+          "files": [
+            "rate-limiting.md",
+            "api-design.md",
+            "auth-oauth2.md",
+            "performance-profiling.md",
+            "graphql.md"
+          ],
+          "expected": [
+            "rate-limiting.md",
+            "api-design.md"
+          ]
+        },
+        {
+          "queryId": "q6",
+          "query": "Docker container deployment image build",
+          "latency": {
+            "mean": 4561,
+            "min": 4561,
+            "max": 4561,
+            "p50": 4561,
+            "p95": 4561
+          },
+          "files": [
+            "docker-containers.md",
+            "cicd-pipeline.md",
+            "kubernetes.md",
+            "testing-integration.md",
+            "microservices.md"
+          ],
+          "expected": [
+            "docker-containers.md",
+            "kubernetes.md"
+          ]
+        },
+        {
+          "queryId": "q7",
+          "query": "unit testing Jest mock spy assertion",
+          "latency": {
+            "mean": 5512,
+            "min": 5512,
+            "max": 5512,
+            "p50": 5512,
+            "p95": 5512
+          },
+          "files": [
+            "testing-unit.md",
+            "testing-integration.md",
+            "auth-jwt.md",
+            "microservices.md",
+            "performance-profiling.md"
+          ],
+          "expected": [
+            "testing-unit.md",
+            "testing-integration.md"
+          ]
+        },
+        {
+          "queryId": "q8",
+          "query": "SQL injection parameterized query prevention",
+          "latency": {
+            "mean": 2429,
+            "min": 2429,
+            "max": 2429,
+            "p50": 2429,
+            "p95": 2429
+          },
+          "files": [
+            "security-sqli.md",
+            "security-xss.md",
+            "db-indexing.md",
+            "api-design.md",
+            "performance-profiling.md"
+          ],
+          "expected": [
+            "security-sqli.md"
+          ]
+        },
+        {
+          "queryId": "q9",
+          "query": "RabbitMQ message queue consumer producer",
+          "latency": {
+            "mean": 2962,
+            "min": 2962,
+            "max": 2962,
+            "p50": 2962,
+            "p95": 2962
+          },
+          "files": [
+            "messaging-queue.md",
+            "api-design.md",
+            "performance-profiling.md",
+            "microservices.md",
+            "docker-containers.md"
+          ],
+          "expected": [
+            "messaging-queue.md"
+          ]
+        },
+        {
+          "queryId": "q10",
+          "query": "memory leak event listener optimization heap",
+          "latency": {
+            "mean": 2365,
+            "min": 2365,
+            "max": 2365,
+            "p50": 2365,
+            "p95": 2365
+          },
+          "files": [
+            "memory-optimization.md",
+            "performance-profiling.md",
+            "cache-redis.md",
+            "microservices.md",
+            "rate-limiting.md"
+          ],
+          "expected": [
+            "memory-optimization.md",
+            "performance-profiling.md"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "docker-query",
+      "name": "Docker (native)",
+      "command": "query",
+      "results": [
+        {
+          "queryId": "q1",
+          "query": "JWT authentication bearer token",
+          "latency": {
+            "mean": 120029,
+            "min": 120029,
+            "max": 120029,
+            "p50": 120029,
+            "p95": 120029
+          },
+          "files": [],
+          "expected": [
+            "auth-jwt.md",
+            "auth-oauth2.md"
+          ]
+        },
+        {
+          "queryId": "q2",
+          "query": "bcrypt password hashing salt rounds",
+          "latency": {
+            "mean": 120024,
+            "min": 120024,
+            "max": 120024,
+            "p50": 120024,
+            "p95": 120024
+          },
+          "files": [],
+          "expected": [
+            "auth-bcrypt.md"
+          ]
+        },
+        {
+          "queryId": "q3",
+          "query": "PostgreSQL connection pool size configuration",
+          "latency": {
+            "mean": 120016,
+            "min": 120016,
+            "max": 120016,
+            "p50": 120016,
+            "p95": 120016
+          },
+          "files": [],
+          "expected": [
+            "db-postgres.md",
+            "db-indexing.md"
+          ]
+        },
+        {
+          "queryId": "q4",
+          "query": "Redis cache TTL expiration key value",
+          "latency": {
+            "mean": 120015,
+            "min": 120015,
+            "max": 120015,
+            "p50": 120015,
+            "p95": 120015
+          },
+          "files": [],
+          "expected": [
+            "cache-redis.md"
+          ]
+        },
+        {
+          "queryId": "q5",
+          "query": "API rate limiting throttle window requests",
+          "latency": {
+            "mean": 120022,
+            "min": 120022,
+            "max": 120022,
+            "p50": 120022,
+            "p95": 120022
+          },
+          "files": [],
+          "expected": [
+            "rate-limiting.md",
+            "api-design.md"
+          ]
+        },
+        {
+          "queryId": "q6",
+          "query": "Docker container deployment image build",
+          "latency": {
+            "mean": 179076,
+            "min": 179076,
+            "max": 179076,
+            "p50": 179076,
+            "p95": 179076
+          },
+          "files": [],
+          "expected": [
+            "docker-containers.md",
+            "kubernetes.md"
+          ]
+        },
+        {
+          "queryId": "q7",
+          "query": "unit testing Jest mock spy assertion",
+          "latency": {
+            "mean": 1443769,
+            "min": 1443769,
+            "max": 1443769,
+            "p50": 1443769,
+            "p95": 1443769
+          },
+          "files": [],
+          "expected": [
+            "testing-unit.md",
+            "testing-integration.md"
+          ]
+        },
+        {
+          "queryId": "q8",
+          "query": "SQL injection parameterized query prevention",
+          "latency": {
+            "mean": 2273685,
+            "min": 2273685,
+            "max": 2273685,
+            "p50": 2273685,
+            "p95": 2273685
+          },
+          "files": [],
+          "expected": [
+            "security-sqli.md"
+          ]
+        },
+        {
+          "queryId": "q9",
+          "query": "RabbitMQ message queue consumer producer",
+          "latency": {
+            "mean": 120027,
+            "min": 120027,
+            "max": 120027,
+            "p50": 120027,
+            "p95": 120027
+          },
+          "files": [],
+          "expected": [
+            "messaging-queue.md"
+          ]
+        },
+        {
+          "queryId": "q10",
+          "query": "memory leak event listener optimization heap",
+          "latency": {
+            "mean": 28813,
+            "min": 28813,
+            "max": 28813,
+            "p50": 28813,
+            "p95": 28813
+          },
+          "files": [],
+          "expected": [
+            "memory-optimization.md",
+            "performance-profiling.md"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mac-query",
+      "name": "Mac (native)",
+      "command": "query",
+      "results": [
+        {
+          "queryId": "q1",
+          "query": "JWT authentication bearer token",
+          "latency": {
+            "mean": 24825,
+            "min": 24825,
+            "max": 24825,
+            "p50": 24825,
+            "p95": 24825
+          },
+          "files": [
+            "auth-jwt.md",
+            "auth-oauth2.md",
+            "auth-bcrypt.md",
+            "testing-integration.md",
+            "microservices.md"
+          ],
+          "expected": [
+            "auth-jwt.md",
+            "auth-oauth2.md"
+          ]
+        },
+        {
+          "queryId": "q2",
+          "query": "bcrypt password hashing salt rounds",
+          "latency": {
+            "mean": 22343,
+            "min": 22343,
+            "max": 22343,
+            "p50": 22343,
+            "p95": 22343
+          },
+          "files": [
+            "auth-bcrypt.md",
+            "auth-jwt.md",
+            "security-sqli.md",
+            "security-xss.md",
+            "db-postgres.md"
+          ],
+          "expected": [
+            "auth-bcrypt.md"
+          ]
+        },
+        {
+          "queryId": "q3",
+          "query": "PostgreSQL connection pool size configuration",
+          "latency": {
+            "mean": 19362,
+            "min": 19362,
+            "max": 19362,
+            "p50": 19362,
+            "p95": 19362
+          },
+          "files": [
+            "db-postgres.md",
+            "db-indexing.md",
+            "security-sqli.md",
+            "performance-profiling.md",
+            "auth-oauth2.md"
+          ],
+          "expected": [
+            "db-postgres.md",
+            "db-indexing.md"
+          ]
+        },
+        {
+          "queryId": "q4",
+          "query": "Redis cache TTL expiration key value",
+          "latency": {
+            "mean": 22408,
+            "min": 22408,
+            "max": 22408,
+            "p50": 22408,
+            "p95": 22408
+          },
+          "files": [
+            "cache-redis.md",
+            "auth-oauth2.md",
+            "rate-limiting.md",
+            "auth-jwt.md",
+            "memory-optimization.md"
+          ],
+          "expected": [
+            "cache-redis.md"
+          ]
+        },
+        {
+          "queryId": "q5",
+          "query": "API rate limiting throttle window requests",
+          "latency": {
+            "mean": 17810,
+            "min": 17810,
+            "max": 17810,
+            "p50": 17810,
+            "p95": 17810
+          },
+          "files": [
+            "rate-limiting.md",
+            "api-design.md",
+            "auth-oauth2.md",
+            "performance-profiling.md",
+            "security-sqli.md"
+          ],
+          "expected": [
+            "rate-limiting.md",
+            "api-design.md"
+          ]
+        },
+        {
+          "queryId": "q6",
+          "query": "Docker container deployment image build",
+          "latency": {
+            "mean": 15269,
+            "min": 15269,
+            "max": 15269,
+            "p50": 15269,
+            "p95": 15269
+          },
+          "files": [
+            "docker-containers.md",
+            "kubernetes.md",
+            "cicd-pipeline.md",
+            "testing-integration.md",
+            "security-xss.md"
+          ],
+          "expected": [
+            "docker-containers.md",
+            "kubernetes.md"
+          ]
+        },
+        {
+          "queryId": "q7",
+          "query": "unit testing Jest mock spy assertion",
+          "latency": {
+            "mean": 15738,
+            "min": 15738,
+            "max": 15738,
+            "p50": 15738,
+            "p95": 15738
+          },
+          "files": [
+            "testing-unit.md",
+            "testing-integration.md",
+            "auth-jwt.md",
+            "microservices.md",
+            "auth-bcrypt.md"
+          ],
+          "expected": [
+            "testing-unit.md",
+            "testing-integration.md"
+          ]
+        },
+        {
+          "queryId": "q8",
+          "query": "SQL injection parameterized query prevention",
+          "latency": {
+            "mean": 15782,
+            "min": 15782,
+            "max": 15782,
+            "p50": 15782,
+            "p95": 15782
+          },
+          "files": [
+            "security-sqli.md",
+            "security-xss.md",
+            "db-indexing.md",
+            "auth-bcrypt.md",
+            "api-design.md"
+          ],
+          "expected": [
+            "security-sqli.md"
+          ]
+        },
+        {
+          "queryId": "q9",
+          "query": "RabbitMQ message queue consumer producer",
+          "latency": {
+            "mean": 17242,
+            "min": 17242,
+            "max": 17242,
+            "p50": 17242,
+            "p95": 17242
+          },
+          "files": [
+            "messaging-queue.md",
+            "microservices.md",
+            "db-postgres.md",
+            "cache-redis.md",
+            "auth-jwt.md"
+          ],
+          "expected": [
+            "messaging-queue.md"
+          ]
+        },
+        {
+          "queryId": "q10",
+          "query": "memory leak event listener optimization heap",
+          "latency": {
+            "mean": 17866,
+            "min": 17866,
+            "max": 17866,
+            "p50": 17866,
+            "p95": 17866
+          },
+          "files": [
+            "performance-profiling.md",
+            "memory-optimization.md",
+            "cache-redis.md",
+            "rate-limiting.md",
+            "security-sqli.md"
+          ],
+          "expected": [
+            "memory-optimization.md",
+            "performance-profiling.md"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bridge-query",
+      "name": "Docker via Bridge",
+      "command": "query",
+      "results": [
+        {
+          "queryId": "q1",
+          "query": "JWT authentication bearer token",
+          "latency": {
+            "mean": 2742,
+            "min": 2742,
+            "max": 2742,
+            "p50": 2742,
+            "p95": 2742
+          },
+          "files": [
+            "auth-jwt.md",
+            "auth-oauth2.md",
+            "auth-bcrypt.md",
+            "testing-integration.md",
+            "microservices.md"
+          ],
+          "expected": [
+            "auth-jwt.md",
+            "auth-oauth2.md"
+          ]
+        },
+        {
+          "queryId": "q2",
+          "query": "bcrypt password hashing salt rounds",
+          "latency": {
+            "mean": 3354,
+            "min": 3354,
+            "max": 3354,
+            "p50": 3354,
+            "p95": 3354
+          },
+          "files": [
+            "auth-bcrypt.md",
+            "auth-jwt.md",
+            "security-sqli.md",
+            "security-xss.md",
+            "db-postgres.md"
+          ],
+          "expected": [
+            "auth-bcrypt.md"
+          ]
+        },
+        {
+          "queryId": "q3",
+          "query": "PostgreSQL connection pool size configuration",
+          "latency": {
+            "mean": 1500,
+            "min": 1500,
+            "max": 1500,
+            "p50": 1500,
+            "p95": 1500
+          },
+          "files": [
+            "db-postgres.md",
+            "db-indexing.md",
+            "security-sqli.md",
+            "performance-profiling.md",
+            "auth-oauth2.md"
+          ],
+          "expected": [
+            "db-postgres.md",
+            "db-indexing.md"
+          ]
+        },
+        {
+          "queryId": "q4",
+          "query": "Redis cache TTL expiration key value",
+          "latency": {
+            "mean": 1741,
+            "min": 1741,
+            "max": 1741,
+            "p50": 1741,
+            "p95": 1741
+          },
+          "files": [
+            "cache-redis.md",
+            "auth-oauth2.md",
+            "rate-limiting.md",
+            "auth-jwt.md",
+            "memory-optimization.md"
+          ],
+          "expected": [
+            "cache-redis.md"
+          ]
+        },
+        {
+          "queryId": "q5",
+          "query": "API rate limiting throttle window requests",
+          "latency": {
+            "mean": 1465,
+            "min": 1465,
+            "max": 1465,
+            "p50": 1465,
+            "p95": 1465
+          },
+          "files": [
+            "rate-limiting.md",
+            "api-design.md",
+            "auth-oauth2.md",
+            "performance-profiling.md",
+            "security-sqli.md"
+          ],
+          "expected": [
+            "rate-limiting.md",
+            "api-design.md"
+          ]
+        },
+        {
+          "queryId": "q6",
+          "query": "Docker container deployment image build",
+          "latency": {
+            "mean": 1489,
+            "min": 1489,
+            "max": 1489,
+            "p50": 1489,
+            "p95": 1489
+          },
+          "files": [
+            "docker-containers.md",
+            "kubernetes.md",
+            "cicd-pipeline.md",
+            "testing-integration.md",
+            "security-xss.md"
+          ],
+          "expected": [
+            "docker-containers.md",
+            "kubernetes.md"
+          ]
+        },
+        {
+          "queryId": "q7",
+          "query": "unit testing Jest mock spy assertion",
+          "latency": {
+            "mean": 1480,
+            "min": 1480,
+            "max": 1480,
+            "p50": 1480,
+            "p95": 1480
+          },
+          "files": [
+            "testing-unit.md",
+            "testing-integration.md",
+            "auth-jwt.md",
+            "microservices.md",
+            "auth-bcrypt.md"
+          ],
+          "expected": [
+            "testing-unit.md",
+            "testing-integration.md"
+          ]
+        },
+        {
+          "queryId": "q8",
+          "query": "SQL injection parameterized query prevention",
+          "latency": {
+            "mean": 1633,
+            "min": 1633,
+            "max": 1633,
+            "p50": 1633,
+            "p95": 1633
+          },
+          "files": [
+            "security-sqli.md",
+            "security-xss.md",
+            "db-indexing.md",
+            "auth-bcrypt.md",
+            "api-design.md"
+          ],
+          "expected": [
+            "security-sqli.md"
+          ]
+        },
+        {
+          "queryId": "q9",
+          "query": "RabbitMQ message queue consumer producer",
+          "latency": {
+            "mean": 1519,
+            "min": 1519,
+            "max": 1519,
+            "p50": 1519,
+            "p95": 1519
+          },
+          "files": [
+            "messaging-queue.md",
+            "microservices.md",
+            "db-postgres.md",
+            "cache-redis.md",
+            "auth-jwt.md"
+          ],
+          "expected": [
+            "messaging-queue.md"
+          ]
+        },
+        {
+          "queryId": "q10",
+          "query": "memory leak event listener optimization heap",
+          "latency": {
+            "mean": 1458,
+            "min": 1458,
+            "max": 1458,
+            "p50": 1458,
+            "p95": 1458
+          },
+          "files": [
+            "performance-profiling.md",
+            "memory-optimization.md",
+            "cache-redis.md",
+            "rate-limiting.md",
+            "security-sqli.md"
+          ],
+          "expected": [
+            "memory-optimization.md",
+            "performance-profiling.md"
+          ]
+        }
+      ]
+    }
+  ],
+  "queries": [
+    {
+      "id": "q1",
+      "query": "JWT authentication bearer token",
+      "expected": [
+        "auth-jwt.md",
+        "auth-oauth2.md"
+      ],
+      "description": "JWT and OAuth authentication"
+    },
+    {
+      "id": "q2",
+      "query": "bcrypt password hashing salt rounds",
+      "expected": [
+        "auth-bcrypt.md"
+      ],
+      "description": "Password hashing"
+    },
+    {
+      "id": "q3",
+      "query": "PostgreSQL connection pool size configuration",
+      "expected": [
+        "db-postgres.md",
+        "db-indexing.md"
+      ],
+      "description": "Database connection pooling"
+    },
+    {
+      "id": "q4",
+      "query": "Redis cache TTL expiration key value",
+      "expected": [
+        "cache-redis.md"
+      ],
+      "description": "Redis caching"
+    },
+    {
+      "id": "q5",
+      "query": "API rate limiting throttle window requests",
+      "expected": [
+        "rate-limiting.md",
+        "api-design.md"
+      ],
+      "description": "API rate limiting"
+    },
+    {
+      "id": "q6",
+      "query": "Docker container deployment image build",
+      "expected": [
+        "docker-containers.md",
+        "kubernetes.md"
+      ],
+      "description": "Docker and container orchestration"
+    },
+    {
+      "id": "q7",
+      "query": "unit testing Jest mock spy assertion",
+      "expected": [
+        "testing-unit.md",
+        "testing-integration.md"
+      ],
+      "description": "Unit testing"
+    },
+    {
+      "id": "q8",
+      "query": "SQL injection parameterized query prevention",
+      "expected": [
+        "security-sqli.md"
+      ],
+      "description": "SQL injection security"
+    },
+    {
+      "id": "q9",
+      "query": "RabbitMQ message queue consumer producer",
+      "expected": [
+        "messaging-queue.md"
+      ],
+      "description": "Message queues"
+    },
+    {
+      "id": "q10",
+      "query": "memory leak event listener optimization heap",
+      "expected": [
+        "memory-optimization.md",
+        "performance-profiling.md"
+      ],
+      "description": "Memory optimization"
+    }
+  ]
+}

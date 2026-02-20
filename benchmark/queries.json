@@ -1,0 +1,62 @@
+[
+  {
+    "id": "q1",
+    "query": "JWT authentication bearer token",
+    "expected": ["auth-jwt.md", "auth-oauth2.md"],
+    "description": "JWT and OAuth authentication"
+  },
+  {
+    "id": "q2",
+    "query": "bcrypt password hashing salt rounds",
+    "expected": ["auth-bcrypt.md"],
+    "description": "Password hashing"
+  },
+  {
+    "id": "q3",
+    "query": "PostgreSQL connection pool size configuration",
+    "expected": ["db-postgres.md", "db-indexing.md"],
+    "description": "Database connection pooling"
+  },
+  {
+    "id": "q4",
+    "query": "Redis cache TTL expiration key value",
+    "expected": ["cache-redis.md"],
+    "description": "Redis caching"
+  },
+  {
+    "id": "q5",
+    "query": "API rate limiting throttle window requests",
+    "expected": ["rate-limiting.md", "api-design.md"],
+    "description": "API rate limiting"
+  },
+  {
+    "id": "q6",
+    "query": "Docker container deployment image build",
+    "expected": ["docker-containers.md", "kubernetes.md"],
+    "description": "Docker and container orchestration"
+  },
+  {
+    "id": "q7",
+    "query": "unit testing Jest mock spy assertion",
+    "expected": ["testing-unit.md", "testing-integration.md"],
+    "description": "Unit testing"
+  },
+  {
+    "id": "q8",
+    "query": "SQL injection parameterized query prevention",
+    "expected": ["security-sqli.md"],
+    "description": "SQL injection security"
+  },
+  {
+    "id": "q9",
+    "query": "RabbitMQ message queue consumer producer",
+    "expected": ["messaging-queue.md"],
+    "description": "Message queues"
+  },
+  {
+    "id": "q10",
+    "query": "memory leak event listener optimization heap",
+    "expected": ["memory-optimization.md", "performance-profiling.md"],
+    "description": "Memory optimization"
+  }
+]
