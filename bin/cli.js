@@ -8,7 +8,7 @@ import inquirer from 'inquirer';
 import { execFile } from 'node:child_process';
 import { existsSync, readFileSync, createReadStream, watchFile, statSync } from 'node:fs';
 import { VERSION, LOG_DIR, PID_FILE } from '../src/constants.js';
-import { getConfig, getServerConfig } from '../src/utils/config.js';
+import { getConfig, getServerConfig, getIndexingConfig, saveIndexingConfig } from '../src/utils/config.js';
 import { checkQmdInstalled, printQmdNotFoundWarning } from '../src/utils/qmd-check.js';
 import {
   listTenants,
@@ -447,6 +447,139 @@ program
     );
 
     console.log(table.toString());
+  });
+
+// ─── configure ───────────────────────────────────────────────────────
+program
+  .command('configure')
+  .description('Interactive configuration wizard')
+  .action(async () => {
+    const { section } = await inquirer.prompt([
+      {
+        type: 'list',
+        name: 'section',
+        message: 'What would you like to configure?',
+        choices: [
+          { name: 'Server  (port, host, timeout, concurrency)', value: 'server' },
+          { name: 'qmd path', value: 'qmdPath' },
+          { name: 'Indexing strategy', value: 'indexing' },
+        ],
+      },
+    ]);
+
+    const config = getConfig();
+
+    if (section === 'server') {
+      const current = getServerConfig();
+      const answers = await inquirer.prompt([
+        {
+          type: 'number',
+          name: 'port',
+          message: 'Port:',
+          default: current.port,
+          validate: (v) => (v > 0 && v < 65536 ? true : 'Must be a valid port (1-65535)'),
+        },
+        {
+          type: 'input',
+          name: 'host',
+          message: 'Host:',
+          default: current.host,
+          validate: (v) => (v.trim() ? true : 'Host is required'),
+        },
+        {
+          type: 'number',
+          name: 'executionTimeout',
+          message: 'Execution timeout (ms):',
+          default: current.executionTimeout,
+          validate: (v) => (v > 0 ? true : 'Must be greater than 0'),
+        },
+        {
+          type: 'number',
+          name: 'maxConcurrent',
+          message: 'Max concurrent executions (0 = unlimited):',
+          default: current.maxConcurrent,
+          validate: (v) => (v >= 0 ? true : 'Must be >= 0'),
+        },
+      ]);
+
+      if (answers.host === '0.0.0.0') {
+        console.log(chalk.yellow('⚠  Binding to 0.0.0.0 exposes the server to all network interfaces!'));
+      }
+
+      config.set('server.port', answers.port);
+      config.set('server.host', answers.host.trim());
+      config.set('server.executionTimeout', answers.executionTimeout);
+      config.set('server.maxConcurrent', answers.maxConcurrent);
+      console.log(chalk.green('✓ Server settings saved.'));
+      console.log(chalk.dim('  Restart qmd-bridge to apply changes.'));
+
+    } else if (section === 'qmdPath') {
+      const currentPath = config.get('qmdPath') || '';
+      const { qmdPath } = await inquirer.prompt([
+        {
+          type: 'input',
+          name: 'qmdPath',
+          message: 'qmd executable path (leave blank to use $PATH):',
+          default: currentPath,
+        },
+      ]);
+
+      config.set('qmdPath', qmdPath.trim());
+      console.log(chalk.green('✓ qmd path saved.'));
+      if (!qmdPath.trim()) {
+        console.log(chalk.dim('  Using qmd from $PATH.'));
+      }
+
+    } else if (section === 'indexing') {
+      const current = getIndexingConfig();
+      const { strategy } = await inquirer.prompt([
+        {
+          type: 'list',
+          name: 'strategy',
+          message: 'Indexing strategy:',
+          default: current.strategy,
+          choices: [
+            { name: 'manual   – only when explicitly triggered', value: 'manual' },
+            { name: 'periodic – re-index every N seconds', value: 'periodic' },
+            { name: 'watch    – monitor directory file changes', value: 'watch' },
+          ],
+        },
+      ]);
+
+      const updates = { strategy };
+
+      if (strategy === 'periodic') {
+        const { interval } = await inquirer.prompt([
+          {
+            type: 'number',
+            name: 'interval',
+            message: 'Re-index interval (seconds):',
+            default: current.periodicInterval,
+            validate: (v) => (v > 0 ? true : 'Must be greater than 0'),
+          },
+        ]);
+        updates.periodicInterval = interval;
+      }
+
+      if (strategy === 'watch') {
+        const { debounce } = await inquirer.prompt([
+          {
+            type: 'number',
+            name: 'debounce',
+            message: 'Debounce delay — wait N seconds after last file change before indexing:',
+            default: current.watchDebounce,
+            validate: (v) => (v >= 0 ? true : 'Must be >= 0'),
+          },
+        ]);
+        updates.watchDebounce = debounce;
+      }
+
+      saveIndexingConfig(updates);
+      console.log(chalk.green('✓ Indexing strategy saved.'));
+      if (strategy !== 'manual') {
+        console.log(chalk.dim('  Restart qmd-bridge to apply changes.'));
+      }
+    }
   });
 
 program.parse();

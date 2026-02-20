@@ -4,6 +4,9 @@ import {
   DEFAULT_HOST,
   DEFAULT_EXECUTION_TIMEOUT,
   DEFAULT_MAX_CONCURRENT,
+  DEFAULT_INDEXING_STRATEGY,
+  DEFAULT_PERIODIC_INTERVAL,
+  DEFAULT_WATCH_DEBOUNCE,
   CONFIG_DIR,
 } from '../constants.js';
 import { mkdirSync } from 'node:fs';
@@ -21,6 +24,15 @@ const schema = {
   },
   qmdPath: { type: 'string', default: '' },
   tenants: { type: 'object', default: {} },
+  indexing: {
+    type: 'object',
+    default: {},
+    properties: {
+      strategy: { type: 'string', default: DEFAULT_INDEXING_STRATEGY },
+      periodicInterval: { type: 'number', default: DEFAULT_PERIODIC_INTERVAL },
+      watchDebounce: { type: 'number', default: DEFAULT_WATCH_DEBOUNCE },
+    },
+  },
 };
 
 let configInstance = null;
@@ -108,6 +120,29 @@ export function deleteTenant(label) {
   const tenants = config.get('tenants') || {};
   delete tenants[label];
   config.set('tenants', tenants);
+}
+
+/**
+ * Get indexing config.
+ * @returns {object} Indexing configuration
+ */
+export function getIndexingConfig() {
+  const config = getConfig();
+  return {
+    strategy: config.get('indexing.strategy') ?? DEFAULT_INDEXING_STRATEGY,
+    periodicInterval: config.get('indexing.periodicInterval') ?? DEFAULT_PERIODIC_INTERVAL,
+    watchDebounce: config.get('indexing.watchDebounce') ?? DEFAULT_WATCH_DEBOUNCE,
+  };
+}
+
+/**
+ * Save indexing config.
+ * @param {object} updates - Partial indexing config to save
+ */
+export function saveIndexingConfig(updates) {
+  const config = getConfig();
+  const current = getIndexingConfig();
+  config.set('indexing', { ...current, ...updates });
 }
 
 /**

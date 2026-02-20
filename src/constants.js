@@ -26,5 +26,12 @@ export const TOKEN_PREFIX = 'qmd_sk_';
 // Dangerous paths that cannot be used as tenant paths
 export const DANGEROUS_PATHS = ['/', homedir()];
 
+// Indexing strategies
+export const INDEXING_STRATEGIES = ['manual', 'periodic', 'watch'];
+export const DEFAULT_INDEXING_STRATEGY = 'manual';
+export const DEFAULT_PERIODIC_INTERVAL = 3600; // seconds
+export const DEFAULT_WATCH_DEBOUNCE = 5;        // seconds
+export const MAX_INDEX_TIMEOUT = 300_000;        // 5 min
+
 // Version
 export const VERSION = '1.0.0';
