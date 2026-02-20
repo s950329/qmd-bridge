@@ -34,4 +34,4 @@ export const DEFAULT_WATCH_DEBOUNCE = 5;        // seconds
 export const MAX_INDEX_TIMEOUT = 300_000;        // 5 min
 
 // Version
-export const VERSION = '1.0.0';
+export const VERSION = '1.1.0';
