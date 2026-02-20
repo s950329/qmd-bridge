@@ -35,11 +35,13 @@ qmd-bridge/
 │   │   └── auth.js          # Bearer Token auth middleware
 │   ├── routes/
 │   │   ├── qmd.js           # POST /qmd route
+│   │   ├── index.js         # POST /index route (trigger re-indexing)
 │   │   └── health.js        # GET /health route
 │   ├── services/
 │   │   ├── executor.js      # qmd execFile wrapper (timeout, maxBuffer)
 │   │   ├── tenant.js        # Tenant CRUD logic
-│   │   └── daemon.js        # Daemon start/stop/status logic
+│   │   ├── daemon.js        # Daemon start/stop/status logic
+│   │   └── indexing.js      # IndexingManager (periodic/watch background indexing)
 │   ├── utils/
 │   │   ├── config.js        # Configuration read/write (conf wrapper)
 │   │   ├── token.js         # Token generation
@@ -82,19 +84,22 @@ These rules are **non-negotiable**. Any code change must comply:
     }
   }
   ```
-- Valid error codes: `INVALID_COMMAND`, `QUERY_TOO_LONG`, `INVALID_REQUEST`, `INVALID_TOKEN`, `EXECUTION_FAILED`, `TOO_MANY_REQUESTS`, `EXECUTION_TIMEOUT`.
+- Valid error codes: `INVALID_COMMAND`, `QUERY_TOO_LONG`, `INVALID_REQUEST`, `INVALID_TOKEN`, `EXECUTION_FAILED`, `TOO_MANY_REQUESTS`, `EXECUTION_TIMEOUT`, `INDEX_IN_PROGRESS`, `SERVICE_UNAVAILABLE`.
 
 ### Configuration
 
 - All config access goes through `src/utils/config.js`.
 - Server settings live under `server.*` key.
 - Tenant data lives under `tenants.<label>` key.
+- Indexing strategy lives under `indexing.*` key (`strategy`, `periodicInterval`, `watchDebounce`).
+- Use `getIndexingConfig()` to read and `saveIndexingConfig(updates)` to write indexing settings.
 - PID file: `~/.config/qmd-bridge/qmd-bridge.pid`
 - Logs directory: `~/.config/qmd-bridge/logs/`
 
 ### API Routes
 
 - `POST /qmd` — Execute qmd query (requires Bearer token auth)
+- `POST /index` — Trigger re-indexing for the authenticated tenant (202 Accepted immediately; 409 if already running)
 - `GET /health` — Health check (no auth required)
 - `POST /mcp` — MCP (Model Context Protocol) endpoint via Streamable HTTP (no auth at route level; search tools require token parameter)
 - All request validation uses Zod schemas.
@@ -110,7 +115,19 @@ These rules are **non-negotiable**. Any code change must comply:
 
 - Daemon uses `spawn` with `detached: true` + `child.unref()`.
 - PID is managed via file at `~/.config/qmd-bridge/qmd-bridge.pid`.
-- Graceful shutdown: stop accepting requests → wait up to 10s for in-flight queries → exit.
+- Graceful shutdown: stop `IndexingManager` → stop accepting requests → wait up to 10s for in-flight queries → exit.
+
+### IndexingManager
+
+`IndexingManager` (`src/services/indexing.js`) manages background indexing tasks:
+
+- Instantiated in `server.js` and attached to the Express app via `app.set('indexingManager', manager)`.
+- `start(tenants)` — called after server listen; sets up intervals or watchers based on `indexing.strategy`.
+- `stop()` — called on graceful shutdown; clears all intervals and chokidar watchers.
+- `isInProgress(label)` — used by `POST /index` to prevent duplicate concurrent indexing.
+- `triggerIndex(tenant)` — public method for on-demand indexing (called by `POST /index`).
+- Internal `_runIndex(tenant)` runs the full pipeline: `qmd collection list` → optional `qmd collection add` → `qmd embed -c <collection>`.
+- Watch mode uses **chokidar** (not `fs.watch`) with `awaitWriteFinish` for reliable debouncing.
 
 ## Token Format
 
@@ -122,3 +139,5 @@ Tokens follow the pattern: `qmd_sk_<32-hex-chars>` (generated via `crypto.random
 - Test multi-tenant isolation: verify that a token for tenant A cannot access tenant B's data.
 - Test input validation: invalid commands, oversized queries, missing fields.
 - Test concurrency limits when `maxConcurrent > 0`.
+- When testing `IndexingManager`, mock `node:child_process`, `chokidar`, and `../../src/utils/config.js`. Use `vi.useFakeTimers()` for periodic strategy tests; advance with `vi.advanceTimersByTimeAsync()` (not `vi.runAllTimersAsync()`, which loops infinitely on `setInterval`).
+- When testing `POST /index`, pass a mock `indexingManager` object to `createTestApp({ indexingManager })`. Omit it to test the `SERVICE_UNAVAILABLE` case.

@@ -120,7 +120,8 @@ graph TD
 | `token show <label>` | Show tenant's token |
 | `token rotate <label>` | Rotate tenant's token (old token is immediately invalidated) |
 | `logs` | View logs (`-f` for follow mode) |
-| `config` | View config file path |
+| `config` | View config file path and current settings |
+| `configure` | Interactive wizard to configure server, qmd path, and indexing strategy |
 
 ## API
 
@@ -161,6 +162,34 @@ curl -s -X POST http://host.docker.internal:3333/qmd \
 | 500 | `EXECUTION_FAILED` | qmd execution failed |
 | 503 | `TOO_MANY_REQUESTS` | Max concurrent limit reached |
 | 504 | `EXECUTION_TIMEOUT` | qmd execution timed out |
+
+### `POST /index` — Trigger re-indexing
+
+Triggers a full re-index for the authenticated tenant in the background. Returns immediately without waiting for indexing to complete.
+
+```bash
+curl -s -X POST http://host.docker.internal:3333/index \
+  -H "Authorization: Bearer <token>"
+```
+
+**Success Response (202 Accepted)**
+
+```json
+{
+  "success": true,
+  "message": "Indexing started for collection \"my-docs\""
+}
+```
+
+**Error Codes**
+
+| HTTP Status | Code | Description |
+| --- | --- | --- |
+| 401 | `INVALID_TOKEN` | Invalid or missing token |
+| 409 | `INDEX_IN_PROGRESS` | Indexing already running for this collection |
+| 503 | `SERVICE_UNAVAILABLE` | Indexing service not initialized |
+
+The index pipeline automatically handles collection creation if it does not exist: `qmd collection add` → `qmd embed`.
 
 ### `GET /health` — Health check
 
@@ -223,6 +252,32 @@ Config is stored at `~/.config/qmd-bridge/config.json`.
 | `server.executionTimeout` | `30000` | qmd execution timeout (ms) |
 | `server.maxConcurrent` | `0` | Max concurrent qmd processes (`0` = unlimited) |
 | `qmdPath` | `""` | Path to qmd binary (empty = use `$PATH`) |
+| `indexing.strategy` | `"manual"` | Indexing strategy: `manual`, `periodic`, or `watch` |
+| `indexing.periodicInterval` | `3600` | Re-index interval in seconds (periodic mode) |
+| `indexing.watchDebounce` | `5` | Seconds to wait after last file change before indexing (watch mode) |
+
+Use `qmd-bridge configure` to change these settings interactively.
+
+### Indexing Strategies
+
+qmd-bridge can automatically keep tenant indexes up to date when content changes.
+
+| Strategy | Description |
+| --- | --- |
+| `manual` | Index only when explicitly triggered via CLI or `POST /index` (default) |
+| `periodic` | Re-index every N seconds automatically |
+| `watch` | Monitor tenant directories for file changes and re-index automatically |
+
+```bash
+# Set up watch mode with 10-second debounce
+qmd-bridge configure
+# → Select "Indexing strategy" → "watch" → debounce: 10
+# → Restart to apply: qmd-bridge restart
+
+# Trigger re-index from a container after updating documents
+curl -s -X POST http://host.docker.internal:3333/index \
+  -H "Authorization: Bearer <token>"
+```
 
 ## Security
 
